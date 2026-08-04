@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/billings
+    username: postgres
+    password: pw_0705_tk
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
