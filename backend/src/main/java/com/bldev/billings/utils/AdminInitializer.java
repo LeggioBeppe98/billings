@@ -23,8 +23,8 @@ public class AdminInitializer {
         if (!userRepository.existsByEmail("admin@timescan.com")) {
             User admin = new User();
             admin.setNome("Admin");
-            admin.setCognome("Timescan");
-            admin.setEmail("admin@timescan.com");
+            admin.setCognome("Billings");
+            admin.setEmail("admin@billings.com");
             admin.setRole(Role.ROLE_ADMIN);
             admin.setPasswordHash(passwordEncoder.encode("password"));
             admin.setAttivo(true);

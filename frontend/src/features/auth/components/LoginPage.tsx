@@ -10,6 +10,8 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
+import { useLoginMutation } from "../queries/auth.queries";
+import { ApiError } from "@/shared/lib/api-client";
 import logo from "@/assets/logo.svg";
 
 const useStyles = makeStyles({
@@ -57,18 +59,26 @@ const useStyles = makeStyles({
 
 export function LoginPage() {
   const styles = useStyles();
+  const loginMutation = useLoginMutation();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log("Login:", data);
+    loginMutation.mutate(data);
   };
+
+  const errorMessage =
+    loginMutation.error instanceof ApiError
+      ? loginMutation.error.message
+      : loginMutation.isError
+        ? "Errore di comunicazione con il server"
+        : undefined;
 
   return (
     <div className={styles.container}>
@@ -106,10 +116,16 @@ export function LoginPage() {
                 <Input type="password" {...register("password")} />
               </Field>
 
+              {errorMessage && (
+                <Text style={{ color: tokens.colorPaletteRedForeground1 }}>
+                  {errorMessage}
+                </Text>
+              )}
+
               <Button
                 type="submit"
                 appearance="primary"
-                disabled={isSubmitting}
+                disabled={loginMutation.isPending}
               >
                 Login
               </Button>
