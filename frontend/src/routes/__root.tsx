@@ -9,9 +9,6 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
-      {/* Navbar/Header globale (se esiste) */}
-      {/* <Header /> */}
-
       <Outlet />
 
       {/* Devtools solo in development */}

@@ -9,6 +9,7 @@ import {
 } from "@fluentui/react-components";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "@tanstack/react-router";
 import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
 import { useLoginMutation } from "../queries/auth.queries";
 import { ApiError } from "@/shared/lib/api-client";
@@ -59,6 +60,7 @@ const useStyles = makeStyles({
 
 export function LoginPage() {
   const styles = useStyles();
+  const navigate = useNavigate();
   const loginMutation = useLoginMutation();
 
   const {
@@ -70,7 +72,9 @@ export function LoginPage() {
   });
 
   const onSubmit = (data: LoginFormValues) => {
-    loginMutation.mutate(data);
+    loginMutation.mutate(data, {
+      onSuccess: () => navigate({ to: "/home" }),
+    });
   };
 
   const errorMessage =
