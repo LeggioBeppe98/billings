@@ -1,7 +1,7 @@
 package com.bldev.billings.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data // Con questa annotazione Lombok mi genera tutti i getter/setter/equals e toString
@@ -17,27 +16,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "tariffe")
-public class Tariffa {
+@Table(name = "metodi_pagamento")
+public class MetodoPagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank
     private String nome;
 
     @Column(nullable = false)
-    @NotNull
-    @Positive
-    private BigDecimal importo;
-
-    @Column(name = "periodicita", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Periodicita periodicita;
-
-    @Column(nullable = false)
-    private Boolean attiva = true;
+    private Boolean attivo = true;
 
     @Column(name = "dcreazione", nullable = false, updatable = false)
     @CreatedDate
@@ -46,5 +36,4 @@ public class Tariffa {
     @Column(name = "dagg", nullable = false)
     @LastModifiedDate
     private LocalDateTime dagg;
-
 }

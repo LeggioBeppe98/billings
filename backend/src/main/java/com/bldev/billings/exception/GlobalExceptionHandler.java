@@ -73,4 +73,31 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
+
+    @ExceptionHandler(TariffaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleTariffaNotFound(TariffaNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(MetodoPagamentoNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleMetodoPagamentoNotFound(MetodoPagamentoNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(MetodoPagamentoAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleMetodoPagamentoAlreadyExistsException(MetodoPagamentoAlreadyExistsException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 }
