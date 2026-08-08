@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository
@@ -14,6 +15,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Page<Cliente> findByNomeContainingIgnoreCase(String nome, Pageable pageable);
     Page<Cliente> findByCognomeContainingIgnoreCase(String cognome, Pageable pageable);
     Optional<Cliente> findByCodiceFiscale(String codiceFiscale);
+    Page<Cliente> findByDataIscrizioneBetween(LocalDate start, LocalDate end, Pageable pageable);
     boolean existsByCodiceFiscale(String codiceFiscale);
     Page<Cliente> findByTariffaId (Long tariffaId, Pageable pageable);
 }
