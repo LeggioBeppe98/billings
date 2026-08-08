@@ -1,4 +1,4 @@
-package com.bldev.billings.repository;
+package com.bldev.billings.repository.features;
 
 import com.bldev.billings.model.Tariffa;
 import org.springframework.data.domain.Page;

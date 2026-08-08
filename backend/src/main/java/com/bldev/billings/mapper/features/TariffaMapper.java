@@ -1,9 +1,6 @@
-package com.bldev.billings.mapper.tariffa;
+package com.bldev.billings.mapper.features;
 
-import com.bldev.billings.dto.tariffa.TariffaCreateDto;
-import com.bldev.billings.dto.tariffa.TariffaDetailDto;
-import com.bldev.billings.dto.tariffa.TariffaListDto;
-import com.bldev.billings.dto.tariffa.TariffaUpdateDto;
+import com.bldev.billings.dto.tariffa.*;
 import com.bldev.billings.model.Tariffa;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -15,4 +12,5 @@ public interface TariffaMapper {
     Tariffa toEntity(TariffaCreateDto dto);
     void updateEntityFromDto(TariffaUpdateDto dto, @MappingTarget Tariffa tariffa);
 
+    TariffaSummaryDto toSummaryDto(Tariffa tariffa);
 }

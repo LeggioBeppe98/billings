@@ -1,4 +1,4 @@
-package com.bldev.billings.mapper.metodopagamento;
+package com.bldev.billings.mapper.features;
 
 import com.bldev.billings.dto.metodipagamento.MetodoPagamentoCreateDto;
 import com.bldev.billings.dto.metodipagamento.MetodoPagamentoDetailDto;
